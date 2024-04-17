@@ -6,8 +6,8 @@ import random
 import string
 
 
-customer_df = pd.read_csv(r'C:\Users\User\Desktop\aws_bootcamp\Assignments\assignment_6_ecommerce_data_pipeline\customers.csv')
-product_df = pd.read_csv(r'C:\Users\User\Desktop\aws_bootcamp\Assignments\assignment_6_ecommerce_data_pipeline\products.csv')
+customer_df = pd.read_csv(r'customers.csv')
+product_df = pd.read_csv(r'products.csv')
 
 customer_ids = customer_df['customer_id'].to_list()
 product_ids = product_df['product_id'].to_list()
@@ -57,7 +57,7 @@ def upload_to_s3():
     file_name = f'transaction_{current_date}.csv'
     file_path = f"transactions/year={year}/month={month}/day={day}/{file_name}"
 
-    s3_client.upload_file(f'C:/Users/User/Desktop/aws_bootcamp/{file_name}', bucket_name, file_path)
+    s3_client.upload_file(f'{file_name}', bucket_name, file_path)
 
     return f'File Upload to S3 {bucket_name} successfully'
 
