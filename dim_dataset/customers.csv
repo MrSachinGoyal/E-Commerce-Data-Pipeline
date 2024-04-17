@@ -1,0 +1,11 @@
+customer_id,first_name,last_name,email,membership_level,row_num
+C12345,John,Doe,john.doe@example.com,Gold,1
+C12346,Alice,Smith,alice.smith@example.com,Silver,2
+C12347,Michael,Johnson,michael.johnson@example.com,Bronze,3
+C12348,Emily,Brown,emily.brown@example.com,Gold,4
+C12349,Daniel,Williams,daniel.williams@example.com,Silver,5
+C12350,Sarah,Jones,sarah.jones@example.com,Bronze,6
+C12351,David,Martinez,david.martinez@example.com,Gold,7
+C12352,Jessica,Garcia,jessica.garcia@example.com,Silver,8
+C12353,James,Lopez,james.lopez@example.com,Bronze,9
+C12354,Emma,Hernandez,emma.hernandez@example.com,Gold,10
