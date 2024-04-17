@@ -4,6 +4,7 @@
 This project involves building a event-driven data ingestion and transformation pipeline focusing on e-commerce transactional data. This pipeline is using AWS services such as S3, Lambda, Glue, Redshift, and SNS, EventBridge to ingest, transform, validate, and insert data into Amazon Redshift for analytical purposes.
 
 ## Architecture
+![AltText](https://github.com/MrSachinGoyal/E-Commerce-Data-Pipeline/blob/master/architecture.png)
 
 ## Prerequisites
 - **Programming Language**: Python 3.11 or higher
