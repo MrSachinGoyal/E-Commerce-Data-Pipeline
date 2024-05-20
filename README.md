@@ -19,6 +19,13 @@ This project involves building a event-driven data ingestion and transformation 
 - Note: Ensure that appropriate IAM roles and permissions are assigned to access and manage the AWS services mentioned above.
 
 ## Workflow of the Project
+- **Data Warehouse Setup**:
+   This data model consists of three tables:
+
+   - **dim_products**: This table stores information about products sold on the e-commerce platform. It includes attributes like product ID, product name, category, price, and supplier ID.
+   - **dim_customers**: This table stores information about customers who have made purchases on the platform. It includes attributes like customer ID, first name, last name, email address, and membership level.
+   - **fact_trxn_data**: This table stores transactional data, including information about each purchase. It includes attributes like transaction ID, customer ID, customer email (redundant with dim_customers table for ease of querying), product ID, product name (redundant with dim_products table for ease of querying), quantity purchased, supplier ID, price paid, transaction date, transaction type, payment type, and transaction status. The schema utilizes various encoding techniques like LZO and Delta for improved compression and performance. The fact table (fact_trxn_data) is configured with a distribution style and key for optimized data partitioning and querying. 
+
 - **Data Generation and Upload:**
    - Mock data generator(python script) produce daily e-commerce transaction files.
    - These files are uploaded to an S3 bucket.
@@ -27,7 +34,7 @@ This project involves building a event-driven data ingestion and transformation 
    - The S3 file upload event triggers a Lambda function specifically designed to initiate an AWS Glue crawler.
 
 - **AWS Glue Crawler Execution:**
-   - The Glue crawler automatically scans and catalogs the data stored in the designated S3 bucket, extracting metadata essential for subsequent analysis.
+   - The AWS Glue crawler scans and catalogs the metadata of data stored in the designated S3 bucket and the dimension and fact tables stored in Amazon Redshift
 
 - **EventBridge Rule for Glue Job Trigger:**
    - An EventBridge rule is configured to detect changes in the state of the Glue crawler.
@@ -39,8 +46,7 @@ This project involves building a event-driven data ingestion and transformation 
      - **Data Validation:** Implementing validation logic to filter out transactions containing invalid customer_id or product_id values, ensuring integrity.
      - **Additional Transformations:** Calculating the total transaction amount by multiplying quantity and price, and categorizing transactions into different classes based on their monetary value, such as "Small", "Medium", or "Large".
 - **Data Loading into Redshift:**
-   - Preloaded dimension tables for products and customers are created within Amazon Redshift.
-   - Transformed data from the Glue job is inserted into the target fact table already created in Amazon Redshift, facilitating analytical queries.
+   - Transformed data from the Glue job is inserted into the target fact table (fact_trxn_data) already created in Amazon Redshift, facilitating analytical queries.
     
 - **EventBridge Rule for Job Status Notification:**
    - Another EventBridge rule is configured to monitor changes in the state of the AWS Glue job.
