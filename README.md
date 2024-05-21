@@ -24,7 +24,7 @@ This project involves building a event-driven data ingestion and transformation 
 
    - **dim_products**: This table stores information about products sold on the e-commerce platform. It includes attributes like product ID, product name, category, price, and supplier ID.
    - **dim_customers**: This table stores information about customers who have made purchases on the platform. It includes attributes like customer ID, first name, last name, email address, and membership level.
-   - **fact_trxn_data**: This table stores transformed data, including information about each purchase. It includes attributes like transaction ID, customer ID, customer email (redundant with dim_customers table for ease of querying), product ID, product name (redundant with dim_products table for ease of querying), quantity purchased, supplier ID, price paid, transaction date, transaction type, payment type, and transaction status. The schema utilizes various encoding techniques like LZO and Delta for improved compression and performance. The fact table (fact_trxn_data) is configured with a distribution style and key for optimized data partitioning and querying. 
+   - **fact_trxn_data**: This table stores transformed data such as information about each purchase. It includes attributes like transaction ID, customer ID, customer email (redundant with dim_customers table for ease of querying), product ID, product name (redundant with dim_products table for ease of querying), quantity purchased, supplier ID, price paid, transaction date, transaction type, payment type, and transaction status. The schema utilizes various encoding techniques like LZO and Delta for improved compression and performance. The fact table (fact_trxn_data) is configured with a distribution style and key for optimized data partitioning and querying. 
 
 - **Data Generation and Upload:**
    - Mock data generator(python script) produce daily e-commerce transaction files.
@@ -50,10 +50,7 @@ This project involves building a event-driven data ingestion and transformation 
     
 - **EventBridge Rule for Job Status Notification:**
    - Another EventBridge rule is configured to monitor changes in the state of the AWS Glue job.
-   - Upon state change detection, this rule activates an SNS topic, triggering notification regarding the job's status, whether it succeeded or failed.
-
-- **SNS Notification:**
-   - Users subscribed to the SNS topic receive email notifications detailing the outcome of the Glue job, ensuring stakeholders are promptly informed about the success or failure of the data transformation process.
+   - Upon state change detection, this rule activates an SNS topic, triggering notification regarding the Glue job's status, whether it succeeded or failed, ensuring stakeholders are promptly informed about the success or failure of the data transformation process.
 
 ## Key Learnings:
 - **Event-Driven Architecture**: Implementing an event-driven data pipeline allows for efficient handling of data ingestion and transformation tasks, ensuring scalability and responsiveness to changes in data sources.
